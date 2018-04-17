@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header-datatables.html" %>
+
+    <body class="user-center-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="module-wrap user-center-wrap">
+                <div class="wrap-container user-center-contaienr">
+                    <% @@include="/includes/user-center-left-container.html" %>
+                        <div class="right-container" data-url="teacher/teacher-comments-composition.html">
+                            <div class="student-high-mark">
+                                <div class="tool-container">
+                                    <!-- <button type="button" class="btn-add btn btn-red">
+                                        <i class="fa fa-plus"></i> 添加</button> -->
+                                </div>
+                                <!-- 搜索 -->
+                                <div class="module-wrap">
+                                    <div class="table-search-container hidden">
+                                        <form class="clearfix">
+                                            <div class="form-group">
+                                                <label for="exampleInputName2">搜索：</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="searchSelect">
+                                                    <option value="">全部</option>
+                                                    <option value="StageDescribe">阶段名称</option>
+                                                    <option value="CourseDescribe">课次名称</option>
+                                                    <option value="CreatedAt">创建时间</option>
+                                                </select>
+                                            </div>
+                                            <div class="search-input-box change-box form-group hidden">
+                                                <input type="text" name="searchValue" placeholder="搜索内容" />
+                                            </div>
+                                            <div class="datetime-box change-box form-group hidden">
+                                                <input id="start-datetime" name="start" data-layuidate="date" placeholder="开始时间" />
+                                                <input id="end-datetime" name="end" data-layuidate="date" placeholder="结束时间" />
+                                            </div>
+                                            <div class="isbegin-box change-box form-group hidden">
+                                                <select name="IsAudit">
+                                                    <option value="true">通过</option>
+                                                    <option value="false">未通过</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    <input type="checkbox" name="isSearchLike" /> 精准搜索
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    <input type="checkbox" name="searchInResult" /> 在结果中搜索
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-default btn-sm serach-btn">搜索</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="table-container hidden">
+                                    <table class="" id="table" width="100%">
+                                    </table>
+                                </div>
+                                <!-- 教师提交作文批注 -->
+                                <div class="teacher-submit-comments-container hidden">
+                                    <form class="layui-form teacher-submit-form">
+                                        <div class="layui-form-item">
+                                            <label class="col layui-col-sm3 label-control">阶段名称：</label>
+                                            <div class="col layui-col-sm5">
+                                                <span class="form-plain-text stage-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="col layui-col-sm3 label-control">课次名称：</label>
+                                            <div class="col layui-col-sm5">
+                                                <span class="form-plain-text section-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="col layui-col-sm3 label-control">作文图片：</label>
+                                            <div class="col layui-col-sm8">
+                                                <div class="img-box clearfix">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="col layui-col-sm3 label-control">作文评分</label>
+                                            <div class="col layui-col-sm5">
+                                                <input type="text" name="score" class="layui-input" lay-verify="required" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="col layui-col-sm3 label-control">批注上传</label>
+                                            <div class="col layui-col-sm8">
+                                                <div class="file-upload-wrap">
+                                                    <input id="file_upload" type="file" name="file" multiple />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item form-footer">
+                                            <label class="col layui-col-sm3 label-control"></label>
+                                            <div class="col layui-col-sm5">
+                                                <button type="button" class="btn btn-red" lay-submit lay-filter="upload-comments">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <!-- 修改模块 -->
+            <div id="modify-module" class="layer-content-molude">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="col layui-col-sm4 label-control">阶段名称：</label>
+                        <div class="col layui-col-sm5">
+                            <span class="form-plain-text stage-text"></span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="col layui-col-sm4 label-control">课次名称：</label>
+                        <div class="col layui-col-sm5">
+                            <span class="form-plain-text section-text"></span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="col layui-col-sm4 label-control">作文图片：</label>
+                        <div class="col layui-col-sm5">
+                            <div class="img-box clearfix">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item form-footer">
+                        <label class="col layui-col-sm4 label-control"></label>
+                        <div class="col layui-col-sm5">
+                            <button type="button" class="btn btn-red" lay-submit lay-filter="get-comments">选择</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer-datatables.html" %>
+                    <script src="@PATH@js/is-login.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/user-center-left-container.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/teacher-comments-composition.js?version=@VERSION@"></script>
+    </body>
+
+</html>

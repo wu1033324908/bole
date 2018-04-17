@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="@PATH@lib/bootstrap/css/bootstrap.min.css?version=@VERSION@" />
+<!-- fileinput需要的样式 -->
+<link rel="stylesheet" href="@PATH@lib/fileinput/fileinput.min.css?version=@VERSION@">
+<% @@include="/includes/header.html" %>
+
+    <body class="play-page">
+        <!-- 背景 -->
+        <div class="page-background transition"></div>
+
+        <!-- header -->
+        <div class="module-wrap page-header-wrap">
+            <div class="wrap-container page-header-container clearfix">
+                <!-- <div class="left-contaienr">
+                    <div class="stage">
+                        第一阶段
+                    </div>
+                    <div class="section">
+                        第一节课
+                    </div>
+                </div> -->
+                <div class="goto-user-center">
+                    <span class="btn btn-info">个人中心</span>
+                </div>
+                <div class="right-container">
+                    <div class="time">
+                        计时：
+                        <span class="h">00</span>:
+                        <span class="m">00</span>:
+                        <span class="s">00</span>
+                    </div>
+                    <div class="score">
+                        分数：
+                        <span>0</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="module-wrap page-content-wrap">
+            <div class="wrap-container page-content-container">
+                <!-- 拼图 -->
+                <div class="module-wrap jigsaw-wrap transition">
+                    <!-- drop -->
+                    <div class="drop-container">
+                        <div class="drop-header">
+                            <div class="stage"></div>
+                            <div class="section"></div>
+                        </div>
+                        <div class="drop-body"></div>
+                        <div class="btn-complete btn btn-info">我完成了</div>
+                        <!-- width/height = 7/10 -->
+                    </div>
+                    <!-- drag -->
+                    <div class="drag-container">
+                        <div class="shaps">
+                            <div class="shap-container circle ">
+                                <div class="item">
+                                    <div class="shap circle" data-type="circle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap circle" data-type="circle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap circle" data-type="circle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap circle" data-type="circle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap circle" data-type="circle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap circle" data-type="circle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container square">
+                                <div class="item">
+                                    <div class="shap square" data-type="square" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/square.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap square" data-type="square" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/square.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap square" data-type="square" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/square.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap square" data-type="square" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/square.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap square" data-type="square" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/square.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap square" data-type="square" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/square.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="shap-container">
+                                <div class="item">
+                                    <div class="shap triangle" data-type="triangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/triangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap triangle" data-type="triangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/triangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap triangle" data-type="triangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/triangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap triangle" data-type="triangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/triangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap triangle" data-type="triangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/triangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap triangle" data-type="triangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/triangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container">
+                                <div class="item">
+                                    <div class="shap rectangle" data-type="rectangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rectangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rectangle" data-type="rectangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rectangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rectangle" data-type="rectangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rectangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rectangle" data-type="rectangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rectangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rectangle" data-type="rectangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rectangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rectangle" data-type="rectangle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rectangle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container rhomboid ">
+                                <div class="item">
+                                    <div class="shap rhomboid" data-type="rhomboid" draggable="true">
+                                        <div class="inner">
+                                            <div class="line">
+                                                <img src="@PATH@assets/img/shap/rhomboid.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhomboid" data-type="rhomboid" draggable="true">
+                                        <div class="inner">
+                                            <div class="line">
+                                                <img src="@PATH@assets/img/shap/rhomboid.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhomboid" data-type="rhomboid" draggable="true">
+                                        <div class="inner">
+                                            <div class="line">
+                                                <img src="@PATH@assets/img/shap/rhomboid.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhomboid" data-type="rhomboid" draggable="true">
+                                        <div class="inner">
+                                            <div class="line">
+                                                <img src="@PATH@assets/img/shap/rhomboid.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhomboid" data-type="rhomboid" draggable="true">
+                                        <div class="inner">
+                                            <div class="line">
+                                                <img src="@PATH@assets/img/shap/rhomboid.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhomboid" data-type="rhomboid" draggable="true">
+                                        <div class="inner">
+                                            <div class="line">
+                                                <img src="@PATH@assets/img/shap/rhomboid.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container trapezoid">
+                                <div class="item">
+                                    <div class="shap trapezoid" data-type="trapezoid" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/trapezoid.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap trapezoid" data-type="trapezoid" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/trapezoid.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap trapezoid" data-type="trapezoid" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/trapezoid.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap trapezoid" data-type="trapezoid" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/trapezoid.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap trapezoid" data-type="trapezoid" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/trapezoid.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap trapezoid" data-type="trapezoid" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/trapezoid.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container">
+                                <div class="item">
+                                    <div class="shap hexagon" data-type="hexagon" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/hexagon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap hexagon" data-type="hexagon" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/hexagon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap hexagon" data-type="hexagon" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/hexagon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap hexagon" data-type="hexagon" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/hexagon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap hexagon" data-type="hexagon" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/hexagon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap hexagon" data-type="hexagon" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/hexagon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container semicircle">
+                                <div class="item">
+                                    <div class="shap semicircle" data-type="semicircle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/semicircle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap semicircle" data-type="semicircle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/semicircle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap semicircle" data-type="semicircle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/semicircle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap semicircle" data-type="semicircle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/semicircle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap semicircle" data-type="semicircle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/semicircle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap semicircle" data-type="semicircle" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/semicircle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container rhombus">
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap rhombus" data-type="rhombus" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/rhombus.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shap-container ellipse">
+                                <div class="item">
+                                    <div class="shap ellipse" data-type="ellipse" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/ellipse.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap ellipse" data-type="ellipse" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/ellipse.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap ellipse" data-type="ellipse" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/ellipse.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap ellipse" data-type="ellipse" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/ellipse.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap ellipse" data-type="ellipse" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/ellipse.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="shap ellipse" data-type="ellipse" draggable="true">
+                                        <div class="inner">
+                                            <img src="@PATH@assets/img/shap/ellipse.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- 截图 -->
+                    <div class="screen-shot-container">
+                        <div class="inner">
+                            <button type="button" class="btn-close btn btn-secondary btn-close-screen-shot">
+                                关闭
+                            </button>
+                        </div>
+                        <div class="shadow"></div>
+                    </div>
+                </div>
+
+                <!-- 写作 -->
+                <div class="writing-composition-container">
+                    <div class="start">
+                        <div class="tip">
+                            点击
+                            <b>开始写作</b>按钮，将开始计时,请注意把控时间。
+                        </div>
+                        <button type="button" class="btn btn-red">开始写作</button>
+                    </div>
+                    <div class="upload">
+                        <div class="tip">
+                            当写作完成后，点击
+                            <b>上传作文</b>按钮，将写完的作文上传到系统。
+                        </div>
+                        <button type="button" class="btn btn-red">上传作文</button>
+                    </div>
+                    <div class="finish">
+                        <div class="tip">
+                            点击
+                            <b>结束上课</b>按钮，本节课将结束。
+                        </div>
+                        <button type="button" class="btn btn-red">结束上课</button>
+                    </div>
+                </div>
+
+                <!-- 卡片banner -->
+                <div class="module-wrap card-banner-wrap">
+
+                    <div class="card-banner-container wrap-container">
+                        <div class="list">
+                        </div>
+                        <button type="button" class="btn-next">下一个</button>
+                    </div>
+
+                    <div class="remove-card-animate-container wrap-container">
+                        <div class="list">
+                        </div>
+                        <button type="button" class="btn-next">下一个</button>
+                    </div>
+
+                    <div class="choose-remove-card-container wrap-container transition">
+                        <div class="container-header">
+                            请选择成语抓小偷中没有出现的
+                            <span>1</span>个成语
+                        </div>
+                        <div class="list">
+                        </div>
+                        <button type="button" class="btn-next">下一个</button>
+                    </div>
+
+                </div>
+
+                <div class="module-wrap prev-comments-wrap">
+                    <div class="wrap-contaienr prev-comments-contianer">
+                        <div class="title">上节课批改内容</div>
+                        <ul>
+                        </ul>
+                        <div class="next">继续</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 开始上课按钮 -->
+        <button type="button" class="btn btn-begin-class transition" style="transition-duration: 1s;">开始上课</button>
+
+        <!-- 播放语音 -->
+        <div class="begin-class-voice transition" style="transition-duration: 1s;">
+            <div class="tip">课前规范</div>
+            <audio src="http://gemini-disk.oss-cn-shanghai.aliyuncs.com/Jzh/f70abe47071542cb8ba1fd9b0271555e.mp3" controls preload="auto" autoplay="autoplay"></audio>
+            <!-- <div class="icon">
+                <img src="@PATH@assets/img/voice3.png" alt="">
+            </div> -->
+            <div class="next-step">我知道了，下一步</div>
+        </div>
+
+        <% @@include="/includes/footer.html" %>
+            <script src="@PATH@js/is-login.js?version=@VERSION@"></script>
+            <script src="@PATH@lib/fileinput/fileinput.min.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+            <script src="@PATH@lib/fileinput/locales/zh.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+
+            <script src="@PATH@lib/html2canvas.min.js?version=@VERSION@"></script>
+
+            <script src="@PATH@js/timeChanging.js?version=@VERSION@"></script>
+            <script src="@PATH@js/play.js?version=@VERSION@"></script>
+    </body>
+
+</html>

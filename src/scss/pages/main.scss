@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+}
+
+// vue框架样式，加上这句并且在vue模板上添加v-cloak
+[v-cloak] {
+    display: none;
+}
+
+.module-wrap {
+    position: relative;
+}
+.show {
+    display: block !important;
+}
+.hide {
+    display: none !important;
+}
+
+/* new */
+
+.clearfix::before,
+.clearfix::after {
+    overflow: hidden;
+    display: table;
+    visibility: hidden;
+    content: '';
+    clear: both;
+}
+
+
+/* new clearfix */
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+
+/* layer 加载层,在layer下打开时，才能显示*/
+
+.layer-content-molude {
+    display: none;
+}
+
+.layui-layer {
+    .layer-content-molude {
+        display: block;
+    }
+}
+
+.show_resource_in_browser {
+    cursor: pointer;
+    &.origin-link {
+        word-break: break-all;
+        display: inline-block;
+        height: 38px;
+        line-height: 38px;
+    }
+    &.origin-image {
+        max-height: 150px;
+        max-width: 400px;
+    }
+    &:hover {
+        color: #0a64da;
+        text-decoration: underline;
+    }
+}
+
+@import "variable";
+@import "common/common";
+@import "utils/top-bar";
+@import "utils/filter";
+@import "utils/form";
+@import "utils/box";
+@import "utils/button";
+@import "utils/datatables";
+@import "utils/table-search";
+
+@import "play/play";
+@import "video/play-video";
+@import "login/login";
+@import "user/user-center";
+@import "high-mark/high-mark";
+@import "bottom-rich-text";
+@import "index/index";

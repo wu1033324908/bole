@@ -1,0 +1,47 @@
+form {
+    padding-top: 20px;
+    .star-red {
+        color: #f00;
+    }
+    .label-control {
+        height: 38px;
+        line-height: 38px;
+    }
+    .form-plain-text {
+        display: inline-block;
+        height: 38px;
+        line-height: 38px;
+    }
+    .img-box {
+        border: 1px solid #ccc;
+        padding: 10px;
+        min-height: 38px;
+        .item {
+            float: left;
+            margin-right: 20px;
+        }
+    }
+    .col {
+        padding: 0 15px;
+    }
+    @media (min-width: 768px) {
+        .label-control {
+            text-align: end;
+        }
+    }
+}
+
+.manage-form {
+    .col {
+        padding: 0 15px;
+        float: left;
+    }
+    @for $i from 1 through 12 {
+        .col-#{$i} {
+            width: ($i/12) * 100%; 
+        }
+    }
+    .label-control {
+        text-align: end;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="@PATH@lib/bootstrap/css/bootstrap.min.css?version=@VERSION@" />
+<!-- fileinput需要的样式 -->
+<link rel="stylesheet" href="@PATH@lib/fileinput/fileinput.min.css?version=@VERSION@">
+<% @@include="/includes/header.html" %>
+
+
+    <body class="login-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <!-- banner and login -->
+            <div class="module-wrap register-wrap">
+                <!-- login -->
+                <div class="wrap-container register-container">
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="title">注册</span>
+                        </div>
+                        <div class="box-body">
+                            <form class="layui-form">
+                                <div class="form-group">
+                                    <select name="type" lay-verify="required" lay-filter="type">
+                                        <option value="">请选择要注册的类型</option>
+                                        <option value="1">学生</option>
+                                        <option value="2">教师</option>
+                                        <option value="3">管理员</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <!-- <input type="text" class="form-control" name="phonenum" placeholder="手机号" value="15980297061" lay-verify="phone"> -->
+                                    <!-- <input type="text" class="form-control" name="phonenum" placeholder="手机号" value="17759513334" lay-verify="phone"> -->
+                                    <input type="text" class="form-control" name="username" placeholder="手机号" lay-verify="phone">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="密码" lay-verify="pass">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password2" placeholder="重复密码" lay-verify="double-pass">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-code" name="code" placeholder="手机验证码" lay-verify="required">
+                                    <a class="get-code" href="javascript:;">获取验证码</a>
+                                </div>
+
+                                <!-- 学生额外模块 -->
+                                <div class="change-group student-group">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="referrer" placeholder="邀请人手机号">
+                                    </div>
+                                </div>
+
+                                <!-- 教师额外模块 -->
+                                <div class="change-group teacher-group">
+                                    <div class="form-group" style="margin-top: 25px;">
+                                        <a class="goto-register-tip" href="@PATH@login/register-teacher-tip.html" target="_blank">查看注册教师的方式</a>
+                                    </div>
+                                    <div class="file-upload-wrap">
+                                        <input id="file_upload" type="file" name="file" multiple />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <a class="btn-register" lay-submit lay-filter="register" href="javascript:;">注册</a>
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <a class="goto-register" href="@PATH@login/login.html" style="float: right;">已有账号?前往登录</a>
+                                    <a class="goto-find-pwd" href="@PATH@login/find-pwd.html" style="float: left;">忘记密码?</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@lib/fileinput/fileinput.min.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+                    <script src="@PATH@lib/fileinput/locales/zh.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+                    
+
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/register.js?version=@VERSION@"></script>
+    </body>
+
+</html>

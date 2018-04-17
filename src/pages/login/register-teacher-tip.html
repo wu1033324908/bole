@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+
+    <body class="login-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="module-wrap register-tip-wrap">
+                <div class="wrap-container register-tip-container">
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="title">教师注册教程</span>
+                        </div>
+                        <div class="box-body">
+                            <ul class="table-of-content">
+                                <li><a href="#resource" style="font-size: 20px;">批改模板下载</a></li>
+                            </ul>
+
+                            <div class="richtext-content" style="margin-top: 50px; font-size: 18px;">
+
+                            </div>
+                            <div id="resource" style="margin-top: 50px;">
+                                <div class="header" style="display: inline-block; margin-top: 12px; font-size: 18px;">批改模板下载</div>
+                                <div class="img-box" style="margin-left: 50px; margin-top: 20px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/register-teacher-tip.js?version=@VERSION@"></script>
+    </body>
+
+</html>

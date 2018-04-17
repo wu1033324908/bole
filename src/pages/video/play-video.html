@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+    <link rel="stylesheet" href="@PATH@lib/aliyun_player/aliplayer-min.css?version=@VERSION@">
+
+    <body class="play-video-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="module-wrap play-video-wrap">
+                <div class="wrap-container play-video-container">
+                    <div class="title"></div>
+                    <div class="prism-player" id="video-player"></div>
+                    <div class="rich-text"></div>
+                </div>
+            </div>
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@lib/aliyun_player/aliplayer-min.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/play-video.js?version=@VERSION@"></script>
+
+    </body>
+
+</html>

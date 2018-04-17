@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+    <!-- <link rel="stylesheet" href="@PATH@lib/filter/css/1118houseSecond.css"> -->
+
+    <body class="high-mark-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="high-mark-wrap module-wrap">
+                <div class="high-mark-container wrap-container">
+                    <div class="search-header">
+
+                    </div>
+                    <div class="list-box">
+                        <div class="list">
+                        </div>
+                    </div>
+                    <div class="paginate-box">
+                        <div id="paginate-ele" class="paginate-ele">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/Filter.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/video-list.js?version=@VERSION@"></script>
+
+    </body>
+
+</html>

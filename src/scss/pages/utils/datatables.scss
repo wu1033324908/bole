@@ -1,0 +1,94 @@
+.table-container {
+    $border-color: #ddd;
+    /* 表格间的分割线 */
+    thead {
+        th {
+            white-space: nowrap;
+            text-align: center;
+            border-left: 1px solid $border-color !important;
+            border-top: 1px solid $border-color !important;
+            border-bottom: 0 !important;
+            &:last-child {
+                border-right: 1px solid $border-color !important;
+            }
+        }
+    }
+    tbody {
+        border-bottom: 1px solid $border-color;
+        td {
+            text-align: center;
+            border-left: 1px solid $border-color !important;
+            border-bottom: 1px solid $border-color !important;
+            background-color: #fff !important;
+            &:last-child {
+                border-right: 1px solid $border-color !important;
+            }
+        }
+    }
+    /* 分页 */
+    .paginate_button {
+        font-size: 12px !important;
+        height: auto !important;
+        padding: 2px 12px !important;
+    }
+    /* 跳页输入框 */
+    .page-skip-input {
+        display: inline-block;
+        width: 40px;
+        margin: 0 10px;
+        padding: 0 3px;
+        text-align: center;
+        border: 1px solid #e2e2e2;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 2px;
+        vertical-align: top;
+        background-color: #fff;
+        box-sizing: border-box;
+        outline: 0;
+    }
+    /* 跳页按钮 */
+    .btn-page-skip {
+        margin-left: 10px;
+        padding: 0 10px;
+        height: 25px;
+        line-height: 25px;
+        transform: translateY(-2px);
+    }
+    /* 导出按钮*/
+    .dt-buttons {
+        margin-left: 20px;
+        .dt-button {
+            font-size: 12px !important;
+            height: auto !important;
+            padding: 4px 14px !important;
+        }
+    }
+    /* 表格多余内容显示省略号 */
+    .show-detail-td {
+        max-width: 200px;
+        img {
+            width: 100%;
+            max-width: 43px;
+        }
+    }
+    /* 显示表格单元格的内容超出显示... */
+    .td-ellipsis {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: default;
+    }
+    /* 处理中提示 */
+    .dataTables_processing {
+        height: 50px;
+        line-height: 50px;
+        z-index: 1; // background: linear-gradient(to right, rgba(200, 200, 200, .5), #fff, rgba(200, 200, 200, .5));
+    }
+    /* 表格内的按钮不换行 */
+    .btn-td {
+        white-space: nowrap;
+    }
+    
+}

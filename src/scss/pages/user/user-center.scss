@@ -1,0 +1,181 @@
+.user-center-body {
+    /* 表格上的工具栏 */
+    .tool-container {
+        height: 50px;
+        padding: 10px 20px;
+        border-bottom: 1px solid #eee;
+    }
+    .goto-complete-info {
+        display: inline-block;
+        width: 90px;
+        background-color: $basic-color;
+        color: #fff;
+        font-size: 17px;
+        line-height: 38px;
+        text-align: center;
+        border-radius: 4px;
+        margin-left: 50px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    .user-center-wrap {
+        .user-center-contaienr {
+            position: relative; // overflow: hidden;
+            margin-top: 20px;
+            border: 1px solid #e1e2e5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .14);
+            background: #fafafa;
+            border-radius: 4px;
+            &::before,
+            &::after {
+                overflow: hidden;
+                display: table;
+                visibility: hidden;
+                content: '';
+                clear: both;
+            }
+            /* new clearfix */
+            &::after {
+                content: "";
+                display: table;
+                clear: both;
+                overflow: hidden;
+                visibility: hidden;
+            }
+            .left-container {
+                float: left;
+                width: 150px;
+                height: 100%;
+                overflow: hidden;
+                .title {
+                    display: block;
+                    width: 150px;
+                    height: 50px;
+                    text-align: center;
+                    line-height: 50px;
+                    font-size: 16px;
+                    color: #99a2aa;
+                    cursor: default;
+                    border-bottom: 1px solid #e1e2e5;
+                }
+                ul {
+                    // border-bottom: 1px solid #e1e2e5;
+                    li {
+                        width: 150px;
+                        height: 48px;
+                        line-height: 48px;
+                        cursor: pointer;
+                        &.active {
+                            background-color: $basic-color!important;
+                            .nav-name {
+                                color: #fff;
+                            }
+                        }
+                        &:hover {
+                            background-color: #e1e4ea;
+                        }
+                        .nav-icon {
+                            vertical-align: middle;
+                            display: inline-block;
+                            width: 18px;
+                            height: 36px;
+                            margin-left: 32px;
+                        }
+                        .nav-name {
+                            margin-left: 12px;
+                            font-size: 14px;
+                            color: #222;
+                        }
+                    }
+                }
+            }
+            .right-container {
+                float: left;
+                width: 840px;
+                border-left: 1px solid #ddd;
+                background: #fff; // min-height: 890px!important;
+                .plaint-text {
+                    font-size: 16px;
+                }
+                .block-title {
+                    display: inline-block;
+                    height: 40px;
+                    font-size: 18px;
+                    color: #222;
+                }
+                .home {
+                    overflow: hidden;
+                    padding: 50px 20px 20px;
+                    .user-info {
+                        float: left;
+                        width: 350px;
+                        margin-left: 50px;
+                        .item {
+                            margin-bottom: 15px;
+                            .btn-modify-user-info {
+                                margin-top: 10px;
+                            }
+                        }
+                    }
+                    .study-schedule,
+                    .comments-info {
+                        float: left;
+                        width: 357px;
+                        min-height: 212px;
+                        .content {
+                            overflow: hidden;
+                            border: 1px solid #d1d1d1;
+                            border-radius: 4px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, .16);
+                            height: auto;
+                            .left {
+                                float: left;
+                                width: 234px;
+                                padding: 39px 40px 20px;
+                                .stage {
+                                    width: 100%;
+                                    font-size: 24px;
+                                    color: #222;
+                                    margin-bottom: 8px;
+                                }
+                                .section {
+                                    font-size: 18px;
+                                    color: #99a2aa;
+                                    margin-bottom: 10px;
+                                }
+                                .stage,
+                                .section {
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                }
+                                .need-comments {
+                                    margin-bottom: 10px;
+                                    font-size: 16px;
+                                    color: #555;
+                                }
+                            }
+                            .right {
+                                float: left;
+                                padding: 13px 0;
+                                .btn {
+                                    display: block;
+                                    margin-top: 20px;
+                                    line-height: 38px;
+                                    &.btn-goto-study-record {
+                                        margin-bottom: 20px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .student-high-mark {
+                    .table-container {
+                        padding: 10px 20px;
+                    }
+                }
+            }
+        }
+    }
+}

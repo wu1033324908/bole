@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+
+    <body class="index-body">
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <!-- banner and login -->
+            <div class="module-wrap banner-login-wrap">
+                <!-- banner -->
+                <div class="banner-container swiper-vue">
+                    <div class="swiper-container index-swiper">
+                        <div class="swiper-wrapper">
+                            <!-- <div class="swiper-slide" v-for="(item, index) in bannerModule.data">
+                                        <img v-bind:src="item.Url" alt="">
+                                    </div> -->
+                        </div>
+                    </div>
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="inner clearfix wrap-container">
+                    <!-- login -->
+                    <div class="login-container">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="title">智能学习平台</div>
+                            </div>
+                            <div class="box-body">
+                                <form class="layui-form">
+                                    <div class="layui-form-item">
+                                        <label class="">手机号</label>
+                                        <div class="right-block">
+                                            <input type="text" name="username" required  autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="">密码</label>
+                                        <div class="right-block">
+                                            <input type="password" name="password" required lay-verify="pass" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block footer-btns">
+                                            <button type="button" class="btn-login" lay-submit lay-filter="login">登录</button>
+                                            <button class="btn-forget" href="@PATH@login/find-pwd.html">忘记密码</button>
+                                            <button type="reset" class="btn-register">注册</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="module-wrap welfare-wrap">
+                <div class="welfare-container wrap-container">
+                    <div class="inner">
+                        <div class="top">WELFARE</div>
+                        <div class="middle">品质教育，免费学习</div>
+                        <!-- <div class="btn-more">
+                            <span>查看更多</span>
+                            <i class="fa fa-angle-right"></i>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="video-vue">
+                <div class="module-wrap video-wrap">
+                    <div class="video-container wrap-container">
+                        <div class="inner">
+                            <div class="top">
+                                <div class="title">{{videoModule.title}}</div>
+                                <div class="sub-title">{{videoModule.subTitle}}</div>
+                            </div>
+                            <div class="middle">
+                                <div class="list">
+                                    <div class="item" v-for="(item, index) in videoModule.data">
+                                        <a v-on:click="goto_play_video" v-bind:data-video="item.VideoURL || ''" v-bind:data-rich-text="item.Richtext || ''" href="@PATH@video/play-video.html" target="_blank">
+                                            <img v-bind:src="item.ImgURL" alt="">
+                                        </a>
+                                        <div class="description">{{item.Name}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-more">
+                                <a href="@PATH@video/video-list.html" target="_blank">
+                                    <span>查看更多</span>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@js/index.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+    </body>
+
+</html>

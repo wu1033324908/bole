@@ -1,0 +1,13 @@
+// 首页顶部栏样式
+.common-top-bar {
+    width: 100%;
+    @include rem-fallback(height, 3);
+    @include rem-fallback(line-height, 3);
+    @include rem-fallback(font-size, 1.3);
+    background-color: #FCFCFC;
+    text-align: center;
+    border-bottom: solid 1px lightgray;
+    .top-bar-right-icon {
+        @include rem-fallback(font-size, 1.3);
+    }
+}

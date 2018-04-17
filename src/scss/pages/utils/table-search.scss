@@ -1,0 +1,41 @@
+.table-search-container {
+    form {
+        * {box-sizing: content-box;}
+        input,
+        select,
+        label,
+        button {
+            height: 21px;
+            font-size: 14px;
+            padding: 5px 7px;
+            outline: none;
+            vertical-align: bottom;
+        }
+        input,
+        select {
+            border: 1px solid #ccc;
+        }
+
+        input[type="checkbox"] {
+            cursor: pointer;
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        label {
+            display: inline-block;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+        .form-control {
+            float: left;
+        }
+    }
+}

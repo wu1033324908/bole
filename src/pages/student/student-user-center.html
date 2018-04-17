@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+
+    <body class="user-center-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="module-wrap user-center-wrap">
+                <div class="wrap-container user-center-contaienr">
+                    <% @@include="/includes/user-center-left-container.html" %>
+                        <div class="right-container" data-url="student/student-user-center.html">
+                            <div class="home">
+                                <div class="user-info">
+                                    <div class="item">
+                                        <span class="plaint-text"></span>
+                                        <span class="block-title">我的信息</span>
+                                    </div>
+                                    <div class="item">
+                                        <span class="plaint-text">手机号：</span>
+                                        <span class="tel"></span>
+                                    </div>
+                                    <div class="item">
+                                        <span class="plaint-text">昵称：</span>
+                                        <span class="nick-name"></span>
+                                    </div>
+                                    <div class="item">
+                                        <span class="plaint-text">剩余课时：</span>
+                                        <span class="study-hour"></span>
+                                    </div>
+                                    <div class="item">
+                                        <div class="btn-modify-user-info btn btn-sm btn-default">修改资料</div>
+                                    </div>
+                                </div>
+                                <div class="study-schedule">
+                                    <div class="item">
+                                        <span class="plaint-text"></span>
+                                        <span class="block-title">学习进度</span>
+                                    </div>
+                                    <div class="content">
+                                        <div class="left">
+                                            <div class="stage"></div>
+                                            <div class="section"></div>
+                                            <div class="other">
+                                                课程尚未开启
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <div class="btn-goto-study btn btn-red">开始学习</div>
+                                            <div class="btn-goto-study-record btn btn-default">学习记录</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@js/is-login.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/user-center-left-container.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/student-user-center.js?version=@VERSION@"></script>
+    </body>
+
+</html>

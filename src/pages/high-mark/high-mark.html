@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+    <!-- <link rel="stylesheet" href="@PATH@lib/filter/css/1118houseSecond.css"> -->
+
+    <body class="high-mark-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="high-mark-wrap module-wrap">
+                <div class="filter-wrap">
+                    <div class="filter-container wrap-container">
+                        <h2 class="filter-title">
+                            <i class="line"></i>高级搜索</h2>
+                        <div class="filter-content">
+                            <div>
+                                <!-- 浮层时可直接给这个div加：class="l_floatHead" -->
+                                <div class="content-header clearfix">
+                                    <b>当前筛选条件</b>
+                                    <div class="filter-result">
+                                        <span class="empty">
+                                            <a href="javascript:;">
+                                                <i class="empty-icon"></i>清空筛选</a>
+                                        </span>
+                                    </div>
+                                    <!-- 无筛选条件时：.l_adsch_sub，有筛选条件时：.l_adsch_sub.l_used -->
+                                    <!--<a class="l_adsch_sub" href="#">立即搜索</a>-->
+                                    <a class="filter-btn" href="#">立即搜索</a>
+                                </div>
+                            </div>
+                            <div class="filter-main-part">
+                                <!-- <dl class="new_dl clearfix" data-title="年级" data-id="Grade">
+                                    <dt>年级：</dt>
+                                    <dd>
+                                        <ul class="clearfix">
+                                            <li>
+                                                <a href="javascript:;" class=" current">不限</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">一年级</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">二年级</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">三年级</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">四年级</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">五年级</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">六年级</a>
+                                            </li>
+                                        </ul>
+                                    </dd> -->
+                                </dl>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="high-mark-container wrap-container">
+                    <div class="search-header">
+
+                    </div>
+                    <div class="list-box">
+                        <div class="list">
+                        </div>
+                    </div>
+                    <div class="paginate-box">
+                        <div id="paginate-ele" class="paginate-ele">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/Filter.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/high-mark.js?version=@VERSION@"></script>
+
+    </body>
+
+</html>

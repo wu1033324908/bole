@@ -1,0 +1,225 @@
+.login-body {
+    $basic-color: #dd4250;
+    $input-color: #757575;
+    a:hover {
+        text-decoration: none;
+    }
+    .wrap-container {
+        width: 1000px;
+        margin: 0 auto;
+    }
+    .register-wrap {
+        // background: url('../assets/img/banner1.png');
+        // background-repeat: no-repeat;
+        // background-size: 100% 100%;
+        // height: 5rem;
+    }
+    .register-container,
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 11px;
+        .box {
+            margin-top: 20px;
+            padding: 0 70px;
+            width: 100%;
+            height: 100%;
+            border-radius: 11px;
+            background-color: rgba(255, 255, 255, 0.5);
+            .box-header {
+                margin-bottom: 28px;
+                height: 28px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+                .title {
+                    height: 56px;
+                    line-height: 56px;
+                    margin: 0 auto;
+                    padding: 0 20px;
+                    font-size: 40px;
+                    background: #fff;
+                    font-weight: 100;
+                }
+            }
+            .box-body {
+                font-family: 黑体;
+                margin-top: 25px;
+                padding-right: 30px;
+                .goto-register,
+                .goto-login,
+                .goto-find-pwd {
+                    font-size: 12px;
+                    color: #020101;
+                    &:hover {
+                        color: $basic-color;
+                    }
+                }
+                .goto-register-tip {
+                    font-size: 15px;
+                    color: $basic-color;
+                    &:hover {
+                        color: lighten($basic-color, 5%);
+                    }
+                }
+                .file-upload-wrap {
+                    position: relative;
+                    margin: 0 auto;
+                    margin-top: 0;
+                    width: 435px;
+                    .btn-red {
+                        color: #fff;
+                        background-color: $basic-color;
+                        border-color: $basic-color;
+                    }
+                }
+                .form-group {
+                    position: relative;
+                    margin: 0 auto;
+                    margin-top: 40px;
+                    width: 415px;
+                    height: 42px;
+                    input::-webkit-input-placeholder {
+                        /* WebKit browsers*/
+                        color: $input-color;
+                        font-size: 14px;
+                    }
+                    input:-moz-placeholder {
+                        /* Mozilla Firefox 4 to 18*/
+                        color: $input-color;
+                        font-size: 14px;
+                    }
+                    input::-moz-placeholder {
+                        /* Mozilla Firefox 19+*/
+                        color: $input-color;
+                        font-size: 14px;
+                    }
+                    input:-ms-input-placeholder {
+                        /* Internet Explorer 10+*/
+                        color: $input-color;
+                        font-size: 14px;
+                    }
+                    dd,
+                    input {
+                        color: $input-color;
+                        font-size: 14px;
+                    }
+                    .layui-this {
+                        background-color: $basic-color;
+                        color: #fff;
+                    }
+                    .form-control,
+                    input {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 3px;
+                        padding: 10px;
+                        border: 1px solid #dfdfdf;
+                        outline: none;
+                    }
+                    .input-code {
+                        float: left; 
+                        margin-right: 20px;
+                        width: 294px;
+                    }
+                    .get-code {
+                        float: left;
+                        width: 100px;
+                        height: 38px;
+                        border-radius: 3px;
+                        float: left;
+                        margin: 1px 1px 0 0;
+                        line-height: 38px;
+                        font-size: 14px;
+                        text-decoration: none;
+                        text-align: center;
+                        background: $basic-color;
+                        color: #fff;
+                    }
+                    .btn-forget,
+                    .btn-register,
+                    .btn-login {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: .03px;
+                        float: left;
+                        margin: 1px 1px 0 0;
+                        line-height: 42px;
+                        font-size: 16px;
+                        text-decoration: none;
+                        text-align: center;
+                        background: $basic-color;
+                        color: #fff;
+                    }
+                }
+                .change-group {
+                    display: none;
+                }
+                @media (max-width: 567px) {
+                    .form-group {
+                        width: 100%;
+                        .input-code {
+                            width: 55%;
+                            margin-right: 4%;
+                        }
+                        .get-code {
+                            width: 40%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    .register-tip-wrap {
+        .register-tip-container {
+            .table-of-content {
+                li {
+                    list-style: disc;
+                    a {
+                        font-size: 16px;
+                        &:hover {
+                            color: $basic-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 567px) {
+        .wrap-container {
+            width: 100%;
+        }
+        .register-wrap  {
+            .register-container {
+                .box {
+                    margin-top: 10px;
+                    padding: 0 35px;
+                    .box-header {
+                        margin-bottom: 14px;
+                        height: 14px;
+                        .title {
+                            height: 28px;
+                            line-height: 28px;
+                            font-size: 20px;
+                            padding: 0 10px;
+                        }
+                    }
+                    .box-body {
+                        margin-top: 12px;
+                        padding-right: 0;
+                        form {
+                            padding-top: 10px;
+                            width: 100%;
+                            .form-group {
+                                margin-top: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

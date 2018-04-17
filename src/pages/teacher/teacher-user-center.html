@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<% @@include="/includes/header.html" %>
+
+    <body class="user-center-body">
+
+        <div class="loading-bg"></div>
+
+        <!-- 顶部和菜单栏 -->
+        <% @@include="/includes/entrance-and-topbar.html" %>
+
+            <div class="module-wrap user-center-wrap">
+                <div class="wrap-container user-center-contaienr">
+                    <% @@include="/includes/user-center-left-container.html" %>
+                        <div class="right-container" data-url="teacher/teacher-user-center.html">
+                            <div class="home">
+                                <div class="user-info">
+                                    <div cla1ss="item">
+                                        <span class="plaint-text"></span>
+                                        <span class="block-title">我的信息</span>
+                                    </div>
+                                    <div class="item">
+                                        <span class="plaint-text">手机号：</span>
+                                        <span class="tel"></span>
+                                    </div>
+                                    <div class="item">
+                                        <span class="plaint-text">昵称：</span>
+                                        <span class="nick-name"></span>
+                                    </div>
+                                    <div class="item">
+                                        <span class="plaint-text">邮箱：</span>
+                                        <span class="email"></span>
+                                    </div>
+                                    <div class="item">
+                                        <div class="btn-modify-user-info btn btn-sm btn-default">修改资料</div>
+                                    </div>
+                                </div>
+                                <div class="comments-info">
+                                    <div class="item">
+                                        <span class="plainteacher_is_officialt-text"></span>
+                                        <span class="block-title">批改信息</span>
+                                    </div>
+                                    <div class="content" style="height: 175;">
+                                        <div class="left" style="width: 100%;">
+                                            <div class="stage">
+                                                总共批改:&nbsp;
+                                                <span></span>&nbsp;篇
+                                            </div>
+                                            <div class="section" style="color: #111;">
+                                                状态:&nbsp;
+                                                <span></span>&nbsp;
+                                            </div>
+                                            <div class="need-comments">
+                                                还需批改:&nbsp;
+                                                <span></span>&nbsp;篇
+                                            </div>
+                                            <div class="btn-goto-comments btn btn-red" style="margin-right: 10px;">批改作文</div>
+                                            <div class="btn-goto-comments-record btn btn-default">批改记录</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <% @@include="/includes/body-footer.html" %>
+                <% @@include="/includes/footer.html" %>
+                    <script src="@PATH@js/is-login.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/user-center-left-container.js?version=@VERSION@"></script>
+                    <script src="@PATH@js/teacher-user-center.js?version=@VERSION@"></script>
+    </body>
+
+</html>
