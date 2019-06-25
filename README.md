@@ -16,9 +16,6 @@
 ## suport
     ``` Mac\Windows\Linux
 
-## contact
-    ``` linzhizhao790086754@gmail.com
-
 ## brief document
     1. src/assets -> dist/assets (watch supported)
     2. src/js -> dist/js (webpack build && watch supported)

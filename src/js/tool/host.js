@@ -145,6 +145,7 @@ Host.course = {
         delete: 'Admin/PhraseDel',
         // 查询全部成语： PhraseQuey(DataTablesParameters dps)
         list: 'Admin/PhraseQuey',
+        
         get: '',
         // 获取成语：GetPhrase(int courseid)  课次id
         get_phrase_by_section_id: 'Admin/GetPhraseCourse',
@@ -215,4 +216,61 @@ Host.rich_text = {
     get: 'Admin/GetRests',
     // UpdateRests(int type,string richtext)     类型,富文本
     modify: 'Admin/UpdateRests'
+}
+
+Host.logo = {
+    url:"Index/GetLogo"
+}
+// 自动保存
+Host.auto_save = {
+    set:"Student/PuzzleRecord",
+
+    get:"Student/GetPuzzleRecord"
+}
+// 分享记录
+Host.share = {
+    list:"Student/ReferrerList",
+
+}
+// 预约上课
+Host.subscribe = {
+    list:"Student/AppointmentQuey",
+
+    add:"Student/AddAppointment",
+
+    mod:"Student/UpdateAppointment",
+
+    del:"Student/DelAppointment"
+}
+// 获取阶段和课次
+Host.stage_course = {
+    get_stage:"Student/GetStage",
+
+    get_course:"Student/GetCourse"
+
+}
+// 获取阶段和课次
+Host.GetIsAudit = {
+    is:"Teacher/GetIsAudit",
+
+}
+// 获取未上传作文列表
+Host.noUpload = {
+    list:"Student/GetNoUpArticleCourse",
+
+    add:"Student/ArticleAdd"
+}
+
+// 获取当前课次是否更新
+Host.courseTimeInfo = {
+    get:"Student/CourseTimeInfo"
+}
+Host.i_konw = {
+    to:"Student/YesCourseTimeInfo"
+}
+Host.im = {
+    to:"IM/GetIMRecord"
+}
+Host.qa = {
+    to:"IM/GetHostPos"
 }

@@ -94,7 +94,6 @@ $(function () {
      * 分享模块
      */
     function shareContent() {
-        console.log('dfjla')
         var user_tel = sessionStorage.getItem('user_tel') || '';
         sosh('#soshid', {
             // 分享的链接，默认使用location.href

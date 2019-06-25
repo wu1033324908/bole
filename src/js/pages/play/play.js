@@ -8,12 +8,60 @@ var _HOST = require('tool/host');
 var _VIEW = require('tool/view');
 require('tool/jquery-extend');
 $(function () {
-
+    let timeadd;
     /**
      * 离开或关闭此页面时的标识，true：有提示
      */
     window.is_confirm = false;
 
+    let isopen = true;
+
+    function auto_save_canvas(isopen) {
+        var setautosave = setInterval(() => {
+            html2canvas($('.drop-container')[0]).then(function (canvas) {
+
+                // 将`.drop-container`转换为二进制，上传到服务器
+                canvas.toBlob(function (blob) {
+                    var fd = new FormData();
+                    fd.append("file", blob);
+                    $.ajax({
+                        url: _HOST.add_rort + _HOST.resource.upload_file,
+                        type: 'POST',
+                        data: fd,
+                        // 不加工原始数据，确保图片上传成功
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            
+                            if (res.Result) {
+                                console.log('自动保存')
+                                // 图片id
+                                var id = res.Id;
+                                // 图片上传成功后保存记录
+                                $.ajax({
+                                    url: _HOST.add_rort + _HOST.auto_save.set,
+                                    type: 'POST',
+                                    data: {
+                                        studentid: sessionStorage.getItem('user_id'),
+                                        courseid: sessionStorage.getItem('course_id'),
+                                        puzzleid: id
+                                    }
+                                })
+                            }
+                        }
+                    })
+                });
+
+            },{
+                backgroundColor:null,useCORS:true,width:$('.drop-container').width(),height:$('.drop-container').height()
+            });
+        }, 30000)
+
+        if (isopen == 'false') {
+            clearInterval(setautosave)
+        }
+    }
+    auto_save_canvas(isopen)
     $(window).on('beforeunload', function () {
             // 只有在标识变量is_confirm不为false时，才弹出确认提示     
             if (window.is_confirm !== false)
@@ -117,7 +165,6 @@ $(function () {
             },
             success: function (res) {
                 layui.layer.close(index);
-
                 if (res.Result && res.Data.length > 0) {
                     // 课前语音
                     recorde_data.front_class = res.Data[0].FrontClassUrl || '';
@@ -192,7 +239,6 @@ $(function () {
             // 开始上课按钮
             var begin_class_module = new beginClassModule({
                 complete: function () {
-                    console.log(111)
 
                     // 展示上节课批改的作文
                     prev_commented_composition.init();
@@ -234,6 +280,7 @@ $(function () {
                                     showRecord(recorde_data.jigsaw, '贴图', () => {
                                         // 初始化拼图模块
                                         jigsaw_module.init();
+                                        // console.log("开始贴图")
                                     });
                                 }
                             }
@@ -250,6 +297,7 @@ $(function () {
                     showRecord(recorde_data.jigsaw, '贴图', () => {
                         // 初始化拼图模块
                         jigsaw_module.init();
+
                     });
                 }
             });
@@ -319,7 +367,6 @@ $(function () {
     function showPrevCommentedComposition(opt) {
 
         var _this = this;
-
 
         /**
          * 完成此模块的后续操作
@@ -417,6 +464,37 @@ $(function () {
 
                 // 点击后，隐藏开始上课按钮
                 $this.css('top', '100%');
+                let s = 0;
+                let m = 0;
+                let h = 0;
+                timeadd = setInterval(function () {
+                    s++;
+                    // console.log(s)
+                    if(s >= 60){
+                        m++;
+                        s = 0
+                    }
+                    if (m >= 60) {
+                        h++;
+                        m = 0;
+                    }
+                    if (s<10) {
+                        $('.time').find('.s').text("0"+s)
+                    }else{
+                        $('.time').find('.s').text(s)
+                    }
+                    if (m<10) {
+                        $('.time').find('.m').text("0"+m)
+                    }else{
+                        $('.time').find('.m').text(m)
+                    }
+                    if(h<10){
+                        $('.time').find('.h').text("0"+h)
+                    }else{
+                        $('.time').find('.h').text(h)
+                    }
+                },1000)
+
 
                 // 开始上课按钮隐藏后，显示播放的语音提示图标
                 setTimeout(() => {
@@ -425,7 +503,6 @@ $(function () {
                     $this.remove();
                     _this.complete();
                 }, get_transition_time($this));
-
             });
         }
 
@@ -481,7 +558,11 @@ $(function () {
             btn: ['我知道了,下一步'],
             success: function (layero, index) {
                 audio = $(layero).find('audio')[0];
-
+                // 播放完毕后跳过
+                // audio.loop = false;
+                audio.addEventListener('ended', function () {
+                    layer.close(index);
+                }, false);
                 // 如果需要在弹出提示框后自动播放
                 // audio.play();
                 // $(layero).find('audio').load();
@@ -915,6 +996,7 @@ $(function () {
      */
     function jigsawModule(opt) {
         var _this = this;
+
         // 拼图模块wrap
         let $jigsaw_wrap = $('.jigsaw-wrap');
 
@@ -953,6 +1035,37 @@ $(function () {
             // 显示拼图模块
             $jigsaw_wrap.addClass('show');
 
+            // 先判断是否有断电保存
+            
+            
+            this.autoSave = function (isopen) {
+                // let istitle = true;
+                // let is = true;
+                $.ajax({
+                    type: "post",
+                    url: _HOST.add_rort + _HOST.auto_save.get,
+                    data: {
+                        studentid: sessionStorage.getItem('user_id'),
+                        courseid: sessionStorage.getItem('course_id')
+                    },
+                    success: function (res) {
+                        if (res.Data && res.Data.length > 0) {
+                            
+                            if(isopen == 'true'){
+                                // $('.drop-header').empty();
+                                // $('.drop-body').empty();
+                                isopen = false;
+                            }
+                            $('.drop-container').css("background-image","url( "+ res.Data[0].Url + ")")
+                            $('.drop-container').css("background-size","100%")
+                            // auto_save_canvas(isopen)
+                        } else {
+                            auto_save_canvas(isopen)
+                        }
+                    }
+                });
+            }
+            
             // 设置top,产生动画效果
             setTimeout(() => {
                 $jigsaw_wrap.css('top', 0);
@@ -960,7 +1073,7 @@ $(function () {
             }, 100);
 
             // 倒计时
-            this.time();
+            // this.time();
             // drag和drop样式
             this.setDragAndDropStyle();
             this.dropEvent();
@@ -1072,26 +1185,25 @@ $(function () {
         // 倒计时
         this.time = function () {
 
-
             // 初始化计时
-            _this.time_changing = $('.page-header-container .time').timeChanging({
-                time: global_setting.jigsaw_duration
-            });
+            // _this.time_changing = $('.page-header-container .time').timeChanging({
+            //     time: global_setting.jigsaw_duration
+            // });
 
             // 开始计时
-            _this.time_changing.start();
+            // _this.time_changing.start();
 
-            // 时间到了的提示
-            _this.timer = setInterval(function () {
-                if (_this.time_changing.isTimeOver()) {
-                    clearInterval(_this.timer)
-                    layui.layer.open({
-                        type: 0,
-                        content: '时间到了',
-                        offset: '20%',
-                    });
-                }
-            }, 1000);
+            // // 时间到了的提示
+            // _this.timer = setInterval(function () {
+            //     if (_this.time_changing.isTimeOver()) {
+            //         clearInterval(_this.timer)
+            //         layui.layer.open({
+            //             type: 0,
+            //             content: '时间到了',
+            //             offset: '20%',
+            //         });
+            //     }
+            // }, 1000);
 
         }
 
@@ -1426,7 +1538,7 @@ $(function () {
                     // 激励语音
                     _this.audio.src = recorde_data.stimulate;
                     _this.audio.play();
-                    console.log(_this.audio.readyState)
+                    // console.log(_this.audio.readyState)
                     // 有可播放的音频,则直接进行画图
                     if (_this.audio.readyState == 0) {
                         // 将这个点集移除
@@ -1455,9 +1567,9 @@ $(function () {
                 // 如果要画圈，则设置画圈后继续拼图个数
                 let count = parseInt($this.data('count')) || 0;
                 $this.data('count', ++count);
-                console.log(count)
+                // console.log(count)
 
-
+                
 
                 // 需要显示canvas来画圆
                 if (_this.is_show_canvas) {
@@ -1491,13 +1603,15 @@ $(function () {
                             $('.drop-container').find('.btn-complete').addClass('hidden');
                             // 移除画圆的canvas
                             $('.drop-container').find('canvas').remove();
-
+                            console.log("上传贴图至服务器")
                             // 将贴图转换成canvas，然后上传到服务器
                             html2canvas($('.drop-container')[0]).then(function (canvas) {
-                                console.log(canvas)
+                                // console.log(canvas)
+                                console.log("上传贴图至服务器")
 
                                 // 将`.drop-container`转换为二进制，上传到服务器
                                 canvas.toBlob(function (blob) {
+                                    console.log("转换二进制")
                                     var fd = new FormData();
                                     fd.append("file", blob);
                                     $.ajax({
@@ -1510,6 +1624,7 @@ $(function () {
                                         success: function (res) {
                                             console.log(res)
                                             if (res.Result) {
+                                                console.log('上传成功！')
                                                 // 图片id
                                                 var id = res.Id;
                                                 // 图片上传成功后保存记录
@@ -1522,9 +1637,12 @@ $(function () {
                                                         imgid: id
                                                     }
                                                 })
+                                                isopen = false
+                                                auto_save_canvas(isopen)
                                             }
                                         }
                                     })
+                                    console.log("调用ajax完成")
                                 });
 
                             });
@@ -1537,7 +1655,7 @@ $(function () {
                             // 删除drag dom element
                             $('.jigsaw-wrap .drag-container').remove();
                             // 停止定时器
-                            _this.time_changing.stop();
+                            // _this.time_changing.stop();
                             _this.complete();
                             layui.layer.close(index);
                         },
@@ -1754,7 +1872,7 @@ $(function () {
             // 结束上课
             this._clickFinishClassButton();
             // 倒计时
-            this._time();
+            // this._time();
         }
 
 
@@ -1806,23 +1924,23 @@ $(function () {
         this._time = function () {
 
 
-            // 初始化计时
-            _this.time_changing = $('.page-header-container .time').timeChanging({
-                time: global_setting.writing_duration
-            });
+            // // 初始化计时
+            // _this.time_changing = $('.page-header-container .time').timeChanging({
+            //     time: global_setting.writing_duration
+            // });
 
 
             // 时间到了的提示
-            _this.timer = setInterval(function () {
-                if (_this.time_changing.isTimeOver()) {
-                    clearInterval(_this.timer)
-                    layui.layer.open({
-                        type: 0,
-                        content: '时间到了',
-                        offset: '20%',
-                    });
-                }
-            }, 1000);
+            // _this.timer = setInterval(function () {
+            //     if (_this.time_changing.isTimeOver()) {
+            //         clearInterval(_this.timer)
+            //         layui.layer.open({
+            //             type: 0,
+            //             content: '时间到了',
+            //             offset: '20%',
+            //         });
+            //     }
+            // }, 1000);
 
         }
 
@@ -1847,11 +1965,11 @@ $(function () {
             $composition_container.find('.upload button').on('click', (e) => {
                 let file_upload_arr = [];
                 // if (_this._judgeProgress('上传作文')) {
-                    layui.layer.open({
-                        type: 1,
-                        title: '上传作文',
-                        offset: '20%',
-                        content: `
+                layui.layer.open({
+                    type: 1,
+                    title: '上传作文',
+                    offset: '20%',
+                    content: `
                             <form class="layui-form">
                                 <div class="file-upload-wrap" style="width: 600px; margin: 50px auto;">
                                     <input id="file_upload" type="file" name="file" multiple />
@@ -1859,83 +1977,83 @@ $(function () {
                                 </div>
                             </form>
                         `,
-                        success: function (layero, index) {
-                            layui.layer.full(index);
-                            //文件上传url
-                            var uploadUrl = _HOST.add_rort + _HOST.resource.upload_file;
-                            /*
-                             * 文件上传的配置及返回结果
-                             */
-                            $("#file_upload").fileInputInit({
-                                uploadUrl: uploadUrl,
-                                extendName: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'TGA']
-                            }, function (res) {
-                                // data.Id += res.data.response.Id + ',';     //产品展示图片id
-                                file_upload_arr.push(res);
-                                console.log(file_upload_arr)
-                            }, function (id) {
-                                file_upload_arr.forEach((ele, index) => {
-                                    console.log(ele.previewId)
-                                    console.log(id)
-                                    if (ele.previewId == id) {
-                                        file_upload_arr.splice(index, 1);
+                    success: function (layero, index) {
+                        layui.layer.full(index);
+                        //文件上传url
+                        var uploadUrl = _HOST.add_rort + _HOST.resource.upload_file;
+                        /*
+                         * 文件上传的配置及返回结果
+                         */
+                        $("#file_upload").fileInputInit({
+                            uploadUrl: uploadUrl,
+                            extendName: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'TGA']
+                        }, function (res) {
+                            // data.Id += res.data.response.Id + ',';     //产品展示图片id
+                            file_upload_arr.push(res);
+                            console.log(file_upload_arr)
+                        }, function (id) {
+                            file_upload_arr.forEach((ele, index) => {
+                                console.log(ele.previewId)
+                                console.log(id)
+                                if (ele.previewId == id) {
+                                    file_upload_arr.splice(index, 1);
+                                }
+                            })
+                            console.log(file_upload_arr)
+                        });
+
+                        $(layero).find('.btn-submit').click(function (e) {
+
+                            let sendData = {
+                                studentid: sessionStorage.getItem('user_id'),
+                                courseid: sessionStorage.getItem('course_id'),
+                                imgid: []
+                            };
+
+                            // 图片id
+                            file_upload_arr.forEach((ele, index) => {
+                                sendData.imgid.push(ele.id);
+                            });
+                            console.log(sendData)
+                            if (sendData.imgid.length <= 0) {
+                                layui.layer.open({
+                                    type: 0,
+                                    content: '请先上传图片',
+                                    offset: '20%',
+                                    time: 3000
+                                });
+                            } else {
+                                $.ajax({
+                                    url: _HOST.add_rort + _HOST.student.composition.add,
+                                    type: 'POST',
+                                    data: sendData,
+                                    success: function (res) {
+                                        if (res.Result) {
+                                            _this.setting.progress.current++;
+                                            layui.layer.open({
+                                                type: 0,
+                                                content: '上传成功',
+                                                offset: '20%',
+                                                end: function () {
+                                                    layui.layer.close(index);
+                                                }
+                                            });
+                                        } else {
+                                            layui.layer.open({
+                                                type: 0,
+                                                content: '上传失败',
+                                                offset: '20%',
+                                                end: function () {
+                                                    // layui.layer.close(index);
+                                                }
+                                            });
+                                        }
                                     }
                                 })
-                                console.log(file_upload_arr)
-                            });
-
-                            $(layero).find('.btn-submit').click(function (e) {
-
-                                let sendData = {
-                                    studentid: sessionStorage.getItem('user_id'),
-                                    courseid: sessionStorage.getItem('course_id'),
-                                    imgid: []
-                                };
-
-                                // 图片id
-                                file_upload_arr.forEach((ele, index) => {
-                                    sendData.imgid.push(ele.id);
-                                });
-                                console.log(sendData)
-                                if (sendData.imgid.length <= 0) {
-                                    layui.layer.open({
-                                        type: 0,
-                                        content: '请先上传图片',
-                                        offset: '20%',
-                                        time: 3000
-                                    });
-                                } else {
-                                    $.ajax({
-                                        url: _HOST.add_rort + _HOST.student.composition.add,
-                                        type: 'POST',
-                                        data: sendData,
-                                        success: function (res) {
-                                            if (res.Result) {
-                                                _this.setting.progress.current++;
-                                                layui.layer.open({
-                                                    type: 0,
-                                                    content: '上传成功',
-                                                    offset: '20%',
-                                                    end: function () {
-                                                        layui.layer.close(index);
-                                                    }
-                                                });
-                                            } else {
-                                                layui.layer.open({
-                                                    type: 0,
-                                                    content: '上传失败',
-                                                    offset: '20%',
-                                                    end: function () {
-                                                        // layui.layer.close(index);
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    })
-                                }
-                            });
-                        }
-                    });
+                            }
+                        });
+                    }
+                });
                 // }
             });
 
@@ -1947,6 +2065,8 @@ $(function () {
          */
         this._clickFinishClassButton = function () {
             $composition_container.find('.finish button').on('click', (e) => {
+                let sumTime = $('.time').find('.h').text() + ":"+  $('.time').find('.m').text() + ":" + $('.time').find('.s').text();
+                console.log(sumTime)
                 layui.layer.open({
                     type: 0,
                     title: '注意',
@@ -1957,16 +2077,21 @@ $(function () {
                         // 页面跳转不需要提示
                         // window.is_confirm = false;
                         // location.href = _HOST.root + 'student/student-user-center.html';
-
+                        // 清除定时器
+                        clearInterval(timeadd)
+                        // let bool =true;
+                        // auto_save_canvas(bool)
                         // 请求提示
                         let layer_index = layui.layer.load();
+                        
                         $.ajax({
                             url: _HOST.add_rort + _HOST.class.finish,
                             type: 'POST',
                             data: {
                                 studentid: sessionStorage.getItem('user_id'),
                                 courseid: sessionStorage.getItem('course_id'),
-                                grade: $.trim($('.page-header-container .score span').text())
+                                grade: $.trim($('.page-header-container .score span').text()),
+                                courseTime:sumTime
                             },
                             complete: () => {
                                 // 请求成功，清除请求提示
@@ -1976,7 +2101,7 @@ $(function () {
                                 if (res.Result) {
                                     layui.layer.open({
                                         type: 0,
-                                        content: '本节课结束！！',
+                                        content: '本节课结束！' + '<br />' + res.info,
                                         offset: '20%',
                                         end: function () {
                                             // 页面跳转不需要提示
@@ -2012,7 +2137,8 @@ $(function () {
             $composition_container.find('.start button').on('click', (e) => {
                 _this.setting.progress.current = _this.setting.progress.START;
                 $composition_container.find('.start').remove();
-                _this.time_changing.start();
+                // _this.time_changing.start();--
+                // $()
             });
         }
 

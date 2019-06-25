@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="@PATH@lib/fileinput/fileinput.min.css?version=@VERSION@">
 <% @@include="/includes/header.html" %>
 
     <body class="login-body">
@@ -27,6 +28,18 @@
                                 <div class="header" style="display: inline-block; margin-top: 12px; font-size: 18px;">批改模板下载</div>
                                 <div class="img-box" style="margin-left: 50px; margin-top: 20px;"></div>
                             </div>
+                            <div class="change-group teacher-group">
+                                <div class="form-group" style="margin-top: 25px;">
+                                    <!-- <a class="goto-register-tip" href="@PATH@login/register-teacher-tip.html" target="_blank">查看注册教师的方式</a> -->
+                                </div>
+                                <div class="file-upload-wrap" style="margin-top: 5px;">
+                                    <input id="file_upload" type="file" name="file" style="margin-top: 5px;" multiple />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <a class="layui-btn" lay-submit lay-filter="complete" href="javascript:;">完成</a> -->
+                                    <a class="layui-btn" lay-submit lay-filter="complete" href="javascript:;" style="line-height: 42px;font-size: 16px;color: #fff;background:#dd4250;">完成</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -34,6 +47,10 @@
 
             <% @@include="/includes/body-footer.html" %>
                 <% @@include="/includes/footer.html" %>
+
+                <script src="@PATH@lib/fileinput/fileinput.min.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+                <script src="@PATH@lib/fileinput/locales/zh.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+
                     <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
                     <script src="@PATH@js/register-teacher-tip.js?version=@VERSION@"></script>
     </body>

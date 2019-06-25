@@ -15,8 +15,8 @@
                     <div class="swiper-container index-swiper">
                         <div class="swiper-wrapper">
                             <!-- <div class="swiper-slide" v-for="(item, index) in bannerModule.data">
-                                        <img v-bind:src="item.Url" alt="">
-                                    </div> -->
+                                    <img v-bind:src="item.Url" alt="">
+                                </div> -->
                         </div>
                     </div>
                     <!-- 如果需要分页器 -->
@@ -46,7 +46,8 @@
                                     <div class="layui-form-item">
                                         <div class="layui-input-block footer-btns">
                                             <button type="button" class="btn-login" lay-submit lay-filter="login">登录</button>
-                                            <button class="btn-forget" href="@PATH@login/find-pwd.html">忘记密码</button>
+                                            <button type="reset" class="btn-forget">忘记密码</button>
+                                            <!-- href="@PATH@login/find-pwd.html" -->
                                             <button type="reset" class="btn-register">注册</button>
                                         </div>
                                     </div>
@@ -83,9 +84,13 @@
                                 <div class="list">
                                     <div class="item" v-for="(item, index) in videoModule.data">
                                         <a v-on:click="goto_play_video" v-bind:data-video="item.VideoURL || ''" v-bind:data-rich-text="item.Richtext || ''" href="@PATH@video/play-video.html" target="_blank">
-                                            <img v-bind:src="item.ImgURL" alt="">
+                                            <img v-bind:src="item.ImgURL" alt="" class="go-to-paly">
+                                        
+                                            <div class="description-box">
+                                                <div class="de_title">{{item.Name}}</div>
+                                                <li class="de_description">{{item.Description}}</li>
+                                            </div>
                                         </a>
-                                        <div class="description">{{item.Name}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -99,13 +104,9 @@
                     </div>
                 </div>
             </div>
-
-
-
             <% @@include="/includes/body-footer.html" %>
                 <% @@include="/includes/footer.html" %>
                     <script src="@PATH@js/index.js?version=@VERSION@"></script>
                     <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
     </body>
-
 </html>

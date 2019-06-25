@@ -11,7 +11,6 @@ $(function () {
 
     // 播放器对象
     var player = null;
-
     
     // 视频链接
     var video_src = sessionStorage.getItem('video_src');
@@ -21,7 +20,6 @@ $(function () {
     var title = sessionStorage.getItem('video_title');
 
     init();
-
     /**
      * 页面初始化
      */
@@ -68,20 +66,17 @@ $(function () {
             // player.getDuration();
             console.log(player.getDuration())
             // player.seek(10)
-            //				console.log(player.getCurrentTime())
+            // console.log(player.getCurrentTime())
 
             player.on('startSeek', function () {
                 console.log(arguments)
             });
         });
     }
-
     /**
      * 初始化富文本
      */
     function initRichText() {
         $('.rich-text').html(Base.decode(rich_text));
     }
-
-
 })

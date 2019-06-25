@@ -160,13 +160,14 @@ $(function () {
                     $list.empty();
                     data.forEach((ele, index) => {
                         $list.append(`
-                            <div class="item">
+                            <div class="item_high-mark">
                                 <a href="${_VIEW.high_mark.detail}?compositionid=${ele.HundredId}" target="_blank">
                                     <div class="desc desc-animate">
-                                        <span>${ele.Headline}</span>
+                                        <span class="height_mark_title">${ele.Headline}</span>
                                     </div>
-                                    <img src="${ele.Url[0]}" alt="">
+                                    <div class="img_height-mark"><img src="${ele.Url[0]}" alt=""></div>
                                 </a>
+                                    
                             </div>
                         `);
                     });

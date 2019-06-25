@@ -99,6 +99,8 @@
         .page-content-container {
             position: relative;
             width: 1200px;
+            left: 50%;
+            margin-left: -600px;
             /* 卡片banner */
             .card-banner-wrap {
                 position: relative;
@@ -249,7 +251,7 @@
                             text-align: center;
                             cursor: pointer;
                             font-size: 24px;
-                            background-color: #fdaa;
+                            background-color: rgba(252, 218, 167, 0.667);
                             box-sizing: border-box;
                             &:hover {
                                 border: 1px solid rgba(241, 196, 128, 0.667);

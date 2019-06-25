@@ -16,6 +16,8 @@ $(function () {
     // 设置邀请人手机号
     $('form').find('input[name=referrer]').val(sessionStorage.getItem('introducer_phone'));
 
+    
+
     // 获取手机验证码
     $('.get-code').on('click', (e) => {
         // 发送验证码对象
@@ -68,7 +70,7 @@ $(function () {
             })
         }
     });
-
+    
     /**
      * 注册的submit事件
      */
@@ -107,15 +109,15 @@ $(function () {
             sendData.imgid = [];
 
             // 判断教室注册是否有上传图片
-            if (data.field.type == 2 && file_upload_arr.length === 0) {
-                layui.layer.open({
-                    type: 0,
-                    content: '请先上传图片',
-                    offset: '20%',
-                    anim: 2,
-                });
-                return false;
-            }
+            // if (data.field.type == 2 && file_upload_arr.length === 0) {
+            //     layui.layer.open({
+            //         type: 0,
+            //         content: '请先上传图片',
+            //         offset: '20%',
+            //         anim: 2,
+            //     });
+            //     return false;
+            // }
             // 请求数据
             for (var i in data.field) {
                 sendData[i] = data.field[i];
@@ -215,7 +217,7 @@ $(function () {
             }
         });
     }
-
+    shareHere()
     // 注册时选择注册类型，显示不同的操作界面
     layui.form.on('select(type)', function (data) {
         console.log(data.value); //得到被选中的值
@@ -224,11 +226,27 @@ $(function () {
             $('.student-group').css('display', 'block').siblings('.change-group').css('display', 'none');
         } else if (data.value == 2) {
             // 显示教师注册界面
-            $('.teacher-group').css('display', 'block').siblings('.change-group').css('display', 'none');
+            $('.student-group').css('display', 'none');
         } else {
             // 显示管理员注册界面
             $('.change-group').css('display', 'none');
         }
     });
+
+
+    function shareHere() {
+        var loc=location.href;
+        var n1=loc.length;
+        var n2=loc.indexOf("?");
+        var tel=decodeURI(loc.substr(n2+1, n1-n2));
+        if (tel.length == 11) {
+            $('select[name=type]').val(1)
+            
+            layui.form.render('select')
+
+            $('.student-group').css('display', 'block').siblings('.change-group').css('display', 'none');
+            $('input[name=referrer]').val(tel)
+        }
+    }
 
 })

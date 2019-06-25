@@ -2,6 +2,8 @@ var projectConfig = require ("../../../projectConfig.js");
 
 var View = module.exports = {};
 
+
+View.rootor = projectConfig.root
 // 学生学习
 View.play = {
     index: projectConfig.root + 'play/play.html'
@@ -15,6 +17,9 @@ View.admin = {
 
 View.login = {
     register: projectConfig.root + 'login/register.html'
+}
+View.forget = {
+    url: projectConfig.root + 'login/find-pwd.html'
 }
 View.high_mark= {
     index: '',
@@ -44,3 +49,18 @@ View.user_center = {
         comments_record: projectConfig.root + 'teacher/teacher-comments-record.html',
     }
 }
+
+View.password = {
+    to : projectConfig.root + "login/find-pwd.html",
+}
+View.entrust = {
+    to : projectConfig.root + "student/student-entrust.html",
+}
+View.showUse = {
+    to : projectConfig.root + "student/student-howToUse.html",
+}
+View.watchVideo = {
+    to : projectConfig.root + "video/play-video.html",
+}
+
+

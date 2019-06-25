@@ -16,9 +16,11 @@ $(function () {
      * 登录的submit事件
      */
     function loginSubmit() {
+        
         layui.form.on('submit(login)', function (data) {
             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
             // alert("我在登录")
+
             var sendData = {}
 
             for (var i in data.field) {
@@ -47,13 +49,13 @@ $(function () {
                         // 登录请求
                         $.ajax({
                             url: _HOST.add_rort + _HOST.login.login,
-                            type: 'POST',
+                            type: 'post',
                             data: sendData,
                             complete: function () {
                                 layui.layer.close(layer_index);
                             },
                             success: function (res) {
-                                console.log(res)
+                                // console.log(res)
                                 if (res.Result) {
                                     sessionStorage.setItem('user_tel', res.Phonenum);
                                     sessionStorage.setItem('user_id', res.UserId);

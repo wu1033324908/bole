@@ -11,6 +11,7 @@ $(function () {
     var $loading = $('.right-container');
     $.pageLoading($loading);
 
+    
     init();
 
     function init() {
@@ -30,6 +31,8 @@ $(function () {
         $('.btn-goto-comments-record').click((e) => {
             location.href = _VIEW.user_center.teacher.comments_record;
         });
+
+        isteacher();
     }
 
     /**
@@ -75,7 +78,7 @@ $(function () {
                 // 隐藏加载层
                 $loading.loading_finish = true;
                 if (res.Result) {
-                    console.log(res.Data[0])
+                    // console.log(res.Data[0])
                     // 将用户数据存储在sessionStorage中
                     sessionStorage.setItem('user_tel', res.Data.Phone || '');
                     sessionStorage.setItem('user_nick_name', res.Data.NickName || '');
@@ -90,5 +93,31 @@ $(function () {
             }
         })
     }
+
+    function isteacher () {
+        $.ajax({
+            type: "post",
+            url: _HOST.add_rort + _HOST.GetIsAudit.is,
+            data: {
+                teacherId:sessionStorage.getItem('user_id')
+            },
+            success: function (res) {
+                if (res.result) {
+                    
+                    let IsAudit = res.Data[0].IsAudit
+                    sessionStorage.setItem("IsAudit",IsAudit)
+                    if (!IsAudit) {   // console.log("非正式")
+                        $('.left-container').find('ul').find('.teacher-nav-wrap').find('li').eq(2).hide()
+                        $('.left-container').find('ul').find('.teacher-nav-wrap').find('li').eq(3).hide()
+                        $('.btn-goto-comments').hide()
+                        $('.btn-goto-comments-record').hide()
+                    }
+
+
+                }
+            }
+        });
+    }
+
 
 });

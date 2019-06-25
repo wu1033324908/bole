@@ -7,13 +7,20 @@ var _HOST = require('tool/host');
 var _VIEW = require('tool/view');
 require('tool/jquery-extend');
 $(function () {
+
+    $('.howToUse').click(function () {
+       window.open(_VIEW.showUse.to) 
+    })
+
     // 加载遮罩层，请求结束后可以隐藏 isShowStartStudyButton();
     var $loading = $('.right-container');
     $.pageLoading($loading);
     init();
-    
+    setTimeout(function () {
+        courseTimeInfo(sessionStorage.getItem('user_id'))
+    },1000)
     function init() {
-        isShowStartStudyButton();
+        // isShowStartStudyButton();
 
         getUserInfo();
 
@@ -48,10 +55,26 @@ $(function () {
      */
     function showUserInfo() {
         // 我的信息
-        $('.home .user-info').find('.nick-name').text(sessionStorage.getItem('user_nick_name'));
+        let _user_nick_name = sessionStorage.getItem('user_nick_name')
+        if (_user_nick_name && _user_nick_name.length > 0) {
+            $('.home .user-info').find('.nick-name').text("欢迎您，" + _user_nick_name);
+        }
+        
         $('.home .user-info').find('.tel').text(sessionStorage.getItem('user_tel'));
         $('.home .user-info').find('.study-hour').text(sessionStorage.getItem('study_hour'));
-
+        $('.home .user-info').find('.CompositionCount').text(sessionStorage.getItem('CompositionCount'));
+        let isVip = sessionStorage.getItem('IsVip')
+        if (isVip != "null") {
+            $('.home .user-info').find('.isvip').text("VIP用户");
+        }
+        let Is_Info = sessionStorage.getItem('IsInfo')
+        console.log('Is_Info : ' + Is_Info)
+        if (Is_Info == 'true') {
+            $('.IsInfo').text('修改资料')
+            // $('.IsInfo').text('完善资料，赠送5次课')
+        }else{
+            $('.IsInfo').text('完善资料，赠送5次课')
+        }
         // 学习进度
         $('.home .study-schedule').find('.stage').text(sessionStorage.getItem('stage_desc'));
         $('.home .study-schedule').find('.section').text(sessionStorage.getItem('section_desc'));
@@ -84,10 +107,17 @@ $(function () {
                     sessionStorage.setItem('section_desc', res.Data[0].CouresDescribe || '');
                     sessionStorage.setItem('stage_desc', res.Data[0].StageDescribe || '');
                     sessionStorage.setItem('study_hour', res.Data[0].Hour || 0);
+                    sessionStorage.setItem('IsVip', res.Data[0].IsVip || null);
+                    sessionStorage.setItem('CompositionCount', res.Data[0].CompositionCount || 0);
+                    sessionStorage.setItem('IsInfo', res.Data[0].IsInfo || false);
 
                     // 用户数据存储成功后，显示用户信息
                     showUserInfo();
+
+                    // 分享
+                    shareTo()
                 }
+                isShowStartStudyButton();
             }
         })
     }
@@ -103,7 +133,8 @@ $(function () {
             url: _HOST.add_rort + _HOST.student.course_can_use,
             type: 'POST',
             data: {
-                courseid: sessionStorage.getItem('course_id')
+                courseid: sessionStorage.getItem('course_id'),
+                studentid: sessionStorage.getItem('user_id')
             },
             success: function (res) {
                 // 隐藏遮罩层
@@ -122,5 +153,63 @@ $(function () {
         })
     }
 
+    function courseTimeInfo(studentId){
+        $.ajax({
+            type: "post",
+            url:  _HOST.add_rort + _HOST.courseTimeInfo.get,
+            data: {
+                studentId:studentId
+            },
+            success: function (res) {
+                if (res.Result) {
+                    if (!res.IsRead) {
+                        layui.layer.open({
+                            content: '<div>' + res.Info +'</div>'
+                            ,btn: ['我知道了']
+                            ,yes: function(index, layero){
+                                $.ajax({
+                                    type: "post",
+                                    url:  _HOST.add_rort + _HOST.i_konw.to,
+                                    data: {
+                                        studentId:studentId
+                                    },
+                                    success: function (res) {
+                                        
+                                    }
+                                });
+                                layui.layer.close(index);
+                            }
+                          });
+                    }     
+                }
+            }
+        });
+    }
 
+
+    function shareTo(){
+
+
+        $('.shareto').click(function () {
+            let urltoshare = 'http://' + window.location.host + _VIEW.login.register + "?" + encodeURI(sessionStorage.getItem('user_tel'));
+            $('.copy-content').text(urltoshare).css('display','none')
+            copyUrl2()
+        })
+
+        
+        
+    }
+    // 复制
+    function copyUrl2(){
+
+        var Url2=$('.copy-content').text()
+        var oInput = document.createElement('input');
+        oInput.value = Url2;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy");
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        layui.layer.msg('已复制，请将链接黏贴给你的朋友！')
+    }
 });

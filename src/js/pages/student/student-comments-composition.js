@@ -13,6 +13,8 @@ $(function () {
      */
     var _TABLE;
 
+    var _FORM = layui.form;
+
     // 初始化表格
     initTable();
     // 表格搜索
@@ -21,6 +23,70 @@ $(function () {
     initModifyModule();
     // 在浏览器中显示大图
     $.showResourceInBrowser();
+
+    // 委托批改
+    entrust();
+    function entrust() {
+        $('.dataTables_wrapper').on('click', 'tbody .btn-entrust', (e) => {
+            let $this = $(e.currentTarget);
+            // 在函数内部需要用到的数据
+            let fun_data = $this.data('modify');
+            console.log(fun_data)
+            $.ajax({
+                type: "post",
+                url: "http://47.100.33.5:60001/Student/UseComposition",
+                data: {
+                    articleid:fun_data.ArticleId,
+                    studentid:sessionStorage.getItem("user_id")
+                },
+                success: function (res) {
+                    if (res.result) {
+                        layui.layer.open({
+                            type: 0,
+                            title: '结果',
+                            content: "提交成功！",
+                            btn: ['确认'],
+                            yes: (index, layero) => {
+                                location.reload();
+                            },
+                            closeBtn: 2
+                        });
+                    } else {
+                        let CompositionCount = sessionStorage.getItem('CompositionCount')
+                        if(CompositionCount == 0){
+                            layui.layer.open({
+                                type: 0,
+                                title: '提示',
+                                content: "剩余委托批改次数不足！",
+                                btn: ['确认'],
+                                yes: (index, layero) => {
+                                    layui.layer.close(index);
+                                    location.href = _VIEW.entrust.to
+                                },
+                                closeBtn: 2
+                            });
+                        }else{
+                            layui.layer.open({
+                                type: 0,
+                                title: '结果',
+                                content: "提交失败!",
+                                btn: ['确认'],
+                                yes: (index, layero) => {
+                                    layui.layer.close(index);
+                                },
+                                closeBtn: 2
+                            });
+                        }
+
+                        
+                    }
+                }
+            });
+            
+        })
+        
+    }
+
 
     // uploadFileModule();
 
@@ -50,15 +116,25 @@ $(function () {
                     }
                 }, {
                     title: '操作',
-                    data: '',
+                    data: 'IsEntrust',
                     orderable: false,
                     searchable: false,
                     className: 'btn-td show-detail-td',
                     render: (data, type, row, meta) => {
-                        return `
-                            <button type="button" class="btn btn-default btn-sm btn-modify" data-modify='${JSON.stringify(row)}' title="详情">详情</button>
+                        var result = '已批改';
+                        if (!data) {
+                            return `
+                            <button type="button" class="btn btn-default btn-sm btn-modify"  data-modify='${JSON.stringify(row)}' title="详情">详情</button>
+                            <button type="button" class="btn btn-default btn-sm btn-entrust" lay-submit lay-filter="entrust" data-modify='${JSON.stringify(row)}' title="委托批改">委托批改</button>
                             
                             `;
+                        }else{
+                            return `
+                            <button type="button" class="btn btn-default btn-sm btn-modify"  data-modify='${JSON.stringify(row)}' title="详情">详情</button>
+                            
+                            `;
+                        }
+                        
                         // <button type="button" class="btn btn-default btn-sm btn-delete" data-modify='${JSON.stringify(row)}' title="删除"><i class="fa fa-trash-o"></i></button>
                     }
                 },
@@ -82,6 +158,18 @@ $(function () {
                         var result = '';
                         if (data) {
                             result = data;
+                        }
+                        return `<div class="td-ellipsis" title="${result}">${result}</div>`;
+                    }
+                },
+                {
+                    title: '是否委托批改',
+                    data: 'IsEntrust',
+                    className: 'show-detail-td',
+                    render: (data, type, row, meta) => {
+                        var result = '已委托';
+                        if (!data) {
+                            result = '未委托';
                         }
                         return `<div class="td-ellipsis" title="${result}">${result}</div>`;
                     }

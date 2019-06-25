@@ -1,41 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 <% @@include="/includes/header.html" %>
-    <!-- <link rel="stylesheet" href="@PATH@lib/filter/css/1118houseSecond.css"> -->
+
+    <link rel="stylesheet" type="text/css" href="@PATH@lib/layim-v3.7.7/dist/css/layui.mobile.css?version=@VERSION@" />
 
     <body class="high-mark-body">
 
         <div class="loading-bg"></div>
+    <!-- 顶部和菜单栏 -->
+    <% @@include="/includes/entrance-and-topbar.html" %>
 
-        <!-- 顶部和菜单栏 -->
-        <% @@include="/includes/entrance-and-topbar.html" %>
 
-            <div class="module-wrap">
-                <div class="wrap-container high-mark-detail-container">
-                    <div class="left-container">
-                        <div class="header">
-                            <h1>点击右下角的联系客服</h1>
-                            <div class="author">
-                                <div class="info">
-                                    <span class="name"></span>
-                                </div>
-                                <div class="meta">
-                                    <span class="publish-time"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="body">
+        <div class="module-wrap">
+            <div class="wrap-container high-mark-detail-container">
+                <div class="left-container">
+                    <div class="header">
+                        <h1>常见问题解答</h1>
+                        <div class="author">
+                            
                         </div>
                     </div>
+                    <div class="body">
+                    </div>
                 </div>
-            </div> 
+            </div>
+        </div>
+
+        <% @@include="/includes/body-footer.html" %>
 
 
-            <% @@include="/includes/body-footer.html" %>
-                <% @@include="/includes/footer.html" %>
-                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
-                    <script src='//kefu.easemob.com/webim/easemob.js?configId=6f251049-3f3a-41c7-9f21-9e2c13282832'></script>
+        <% @@include="/includes/footer.html" %>
+        <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
 
+
+        <!-- <script src="@PATH@lib/jquery/jquery.min.js?version=@VERSION@"></script> -->
+        <script src="@PATH@lib/layim-v3.7.7/dist/layui.js?version=@VERSION@" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript">
+            layui.use('mobile', function () {
+
+                var mobile = layui.mobile,
+                    layim = mobile.layim;
+
+                //基础配置
+                layim.config({
+                    init: {
+                        //设置我的基础信息
+                        mine: {
+                            "username": "访客" //我的昵称
+                                ,
+                            "id": 1 //我的ID
+                                ,
+                            "avatar": "http://tp1.sinaimg.cn/1571889140/180/40030060651/1" //我的头像
+                        },
+                        friend: [] //见下文：init数据格式
+                    },
+                    brief: true,
+                    title: "客服中心",
+                    isNewFriend: false,
+
+                });
+                //创建一个会话
+                layim.chat({
+                    id: 2,
+                    name: '客服一想象作文',
+                    type: 'kefu' //friend、group等字符，如果是group，则创建的是群聊
+                        ,
+                    avatar: 'http://tp1.sinaimg.cn/1571889140/180/40030060651/1'
+                });
+
+                layim.on('sendMessage', function (res) {
+                    var mine = res.mine; //包含我发送的消息及我的信息  
+                    console.log(mine)
+                    $.ajax({
+                        type: "post",
+                        url: "http://47.100.33.5:60001/IM/GetIMRecord",
+                        data: {
+                            question: mine.content
+                        },
+                        success: function (res) {
+                            console.log(res)
+                            if (res.Result) {
+                                setTimeout(function () {
+                                    layim.getMessage({
+                                        username: "客服一想象作文",
+                                        avatar: "http://tp1.sinaimg.cn/1571889140/180/40030060651/1",
+                                        id: 2,
+                                        type: "kefu",
+                                        cid: Math.random() * 100000 | 0,
+                                        content: res.data
+                                    });
+                                }, 1000);
+                                $.ajax({
+                                    type: "post",
+                                    url: "http://47.100.33.5:60001/Admin/AddIMContent",
+                                    data: {
+                                        chatId: '2',
+                                        chatAt: getNowFormatDate(),
+                                        chatContent: mine.content
+                                    },
+                                    success: function (res) {
+                                        console.log(res)
+                                    }
+                                });
+                            } else {
+
+                            }
+
+                        }
+                    });
+                });
+
+                function getNowFormatDate() {
+                    var date = new Date();
+                    var seperator1 = "-";
+                    var seperator2 = ":";
+                    var month = date.getMonth() + 1;
+                    var strDate = date.getDate();
+                    if (month >= 1 && month <= 9) {
+                        month = "0" + month;
+                    }
+                    if (strDate >= 0 && strDate <= 9) {
+                        strDate = "0" + strDate;
+                    }
+                    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+                        " " + date.getHours() + seperator2 + date.getMinutes() +
+                        seperator2 + date.getSeconds();
+                    console.log(currentdate)
+                    return currentdate;
+                }
+                $.ajax({
+                    type: "post",
+                    url: "http://47.100.33.5:60001/IM/GetHostPos",
+                    success: function (res) {
+                        if(res.result){
+                            res.data.forEach((ele,index)=>{
+                                $('.author').append(`
+                                    <div class="info">
+                                        <span class="Question">问题：${ele.Question}</span>
+                                    </div>
+                                    
+                                    <div class="meta">
+                                        <span class="Answer">解答：${ele.Answer}</span>
+                                    </div>
+                                    <div class="h10"></div>
+                                `)
+                            })
+                        }
+
+                        // $('.author').find('')
+
+
+                        
+                    }
+                });
+            });
+        </script>
+
+        <!-- <script src="@PATH@js/common.js?version=@VERSION@"></script> -->
+
+        <!-- <script src="@PATH@js/set-font-size.js?version=@VERSION@"></script>  -->
     </body>
 
 </html>

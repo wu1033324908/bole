@@ -14,6 +14,7 @@ $(function () {
      * url为null时不进行跳转
      * 
      */
+    
     var arr_demo1 = [{
             title: '家长学校',
             url: 'video/video-list.html'
@@ -23,11 +24,14 @@ $(function () {
             url: 'high-mark/high-mark.html'
         },
         {
+            title: '作文助手',
+            url: 'play/play-free.html'
+        },
+        {
             title: '客服中心',
             url: 'service/customer-service.html'
         }
     ];
-
     // 菜单栏列表jQuery对象
     var $topbar_list = $('.topbar-contaienr .topbar-nav .list');
 
@@ -60,4 +64,19 @@ $(function () {
         }
     })
 
+    // 前端获取LOGO
+    $.ajax({
+        type: "post",
+        url: _HOST.add_rort + _HOST.logo.url,
+        data: {
+        },
+        success: function (res) {
+            // console.log(res)
+            if (res.Result) {
+                $('.topbar-logo').find('a').append(`
+                    <img src="${res.Data[0].Url}" alt="" >             
+                `) 
+            }
+        }
+    });
 })

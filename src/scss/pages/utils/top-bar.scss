@@ -24,9 +24,10 @@
     }
 }
 .top-bar-wrap {
-    $basic-color: #dd4250;
+    border-bottom: 1px solid #ccc;
+    // $basic-color: #77bc28;
     // background-color: #35034a;
-    background-color: #333;
+    background-color: #fff;
     .topbar-contaienr {
         width: 1000px;
         margin: 0 auto;
@@ -35,7 +36,7 @@
         justify-content: space-between;
         align-items: center;
         // background-color: #35034a;
-        background-color: #333;
+        background-color:#fff ;
         .topbar-logo {
             @include padding();
             flex-grow: 1;
@@ -57,13 +58,15 @@
                 }
             }
             img {
-                width: 64px;
+                height: 40px;
+                width: 137px;
             }
         }
         .topbar-nav {
-            @include padding();
+            // @include padding();
             flex-grow: 2;
             font-family: 黑体;
+            height: 60px;
             .list {
                 display: flex;
                 flex-wrap: wrap;
@@ -71,14 +74,19 @@
                 align-items: center;
                 height: 100%;
                 .item {
+                    line-height: 60px;
+                    height: 100%;
                     flex-grow: 1;
                     text-align: end;
                     cursor: pointer;
                     a {
-                        font-size: 26px;
+                        padding: 16px 0;
+                        font-size: 22px;
                         color: $basic-color;
                         &:hover {
                             text-decoration: none;
+                            background-color: $basic-color;
+                            color: #fff;
                         }
                     }
                 }
@@ -104,6 +112,8 @@
             flex-wrap: wrap;
             padding-left: 0;
             .topbar-logo {
+                // max-height: 110px;
+                //w
                 .topbar-title {
                     margin: 0 7px;
                     .top {
@@ -115,7 +125,9 @@
                     }
                 }
                 img {
-                    width: 32px;
+                    // width: 32px;
+                    height: 55px;
+                    width: 230px;
                 }
             }
             .topbar-nav {

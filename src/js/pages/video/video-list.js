@@ -122,19 +122,35 @@ $(function () {
                         $list.append(`
                             <div class="item">
                                 <a href="${_HOST.root}video/play-video.html" target="_blank" data-video="${ele.VideoURL || ''}" data-rich-text="${ele.Richtext || ''}">
-                                    <img src="${ele.ImgURL}" alt="">
+                                    <div class="video-list-img"><img src="${ele.ImgURL}" alt=""></div>
+                                
+                                    <div class="description_title">${ele.Name}</div>
+                                    <div class="description">${ele.Description}</div>
                                 </a>
-                                <div class="description">${ele.Description}</div>
                             </div>
                         `);
                     });
-                    $list.on('click', 'a img', (e) => {
-                        var $current = $(e.target);
-                        // 设置video数据
-                        sessionStorage.setItem('video_src', $current.parent().data('video'));
-                        // 设置富文本数据
-                        sessionStorage.setItem('video_rich_text', $current.parent().data('rich-text'));
-                        sessionStorage.setItem('video_title', $current.parent().siblings('.description').text());
+                    $list.on('click', '.item', (e) => {
+                        e.preventDefault();
+                    
+                        var $current = e.target
+                        let _a = $($current).parents('a')
+                        // var $current = $(".video-list-img").find("img");
+                        console.log(_a)
+                        if(_a.length > 0){
+                            palyVideo(_a)
+                        }else{
+                            palyVideo($(_a.prevObject[0]).find('a'))
+                        }
+                        function palyVideo(obj) {
+                            window.open(_VIEW.watchVideo.to)
+                            // 设置video数据
+                            sessionStorage.setItem('video_src', obj.data('video'));
+                            // 设置富文本数据
+                            sessionStorage.setItem('video_rich_text', obj.data('rich-text'));
+                            sessionStorage.setItem('video_title', obj.siblings('.description').text());
+                        }
+                        
                     })
                 }
             }

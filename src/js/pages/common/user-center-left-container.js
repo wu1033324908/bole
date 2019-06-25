@@ -7,10 +7,10 @@ var _HOST = require('tool/host');
 var _VIEW = require('tool/view');
 require('tool/jquery-extend');
 $(function () {
-
+    
     // li jQuery对象
     var $lis = $('.user-center-wrap .left-container ul').find('li');
-    console.log($lis)
+    // console.log($lis)
     // 右边可变化的内容
     var $right_container = $('.user-center-wrap .right-container');
     // 左边的nav
@@ -42,11 +42,38 @@ $(function () {
     $lis.each((index, ele) => {
         let $this = $(ele);
         if ($this.data('url') === $right_container.data('url')) {
-            console.log($this.data('url'))
+            // console.log($this.data('url'))
             $this.addClass('active').siblings().removeClass('active');
             return false;
         }
     });
+    function IsAudit () {
+        setTimeout(() => {
+            let IsAudit = sessionStorage.getItem('IsAudit')
+        if (!IsAudit) {
+            console.log("隐藏")
+            // // $lis.eq(2).css("display","none")
+            // $lis.eq(1).hide()
+            // teacher/teacher-comments-composition.html teacher/teacher-comments-record.html
+            $lis.each((index, ele) => {
+                let $this = $(ele);
+                if ($this.data('url') ==="teacher/teacher-comments-composition.html") {
+                    $this.css('display','none')
+                    // return false;
+                }
+                if ($this.data('url') ==="teacher/teacher-comments-record.html") {
+                    $this.css('display','none')
+                    return false;
+                }
+            });
+        }
+        }, 100);
+    }
+    IsAudit ()
 
 
+    // $('#student-password-mod').click(function (e) {
+    //     e.preventDefault()
+    //     window.location.href = _VIEW.password.to;
+    // })
 });

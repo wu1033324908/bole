@@ -8,7 +8,6 @@
 
         <!-- 顶部和菜单栏 -->
         <% @@include="/includes/entrance-and-topbar.html" %>
-
             <div class="module-wrap user-center-wrap">
                 <div class="wrap-container user-center-contaienr">
                     <% @@include="/includes/user-center-left-container.html" %>
@@ -20,11 +19,15 @@
                                         <span class="block-title">我的信息</span>
                                     </div>
                                     <div class="item">
+                                        <span class="plaint-text"></span>
+                                        <span class="isvip" style="font-size: 16px">普通用户</span>
+                                    </div>
+                                    <div class="item">
                                         <span class="plaint-text">手机号：</span>
                                         <span class="tel"></span>
                                     </div>
                                     <div class="item">
-                                        <span class="plaint-text">昵称：</span>
+                                        <span class="plaint-text">学员姓名：</span>
                                         <span class="nick-name"></span>
                                     </div>
                                     <div class="item">
@@ -32,7 +35,18 @@
                                         <span class="study-hour"></span>
                                     </div>
                                     <div class="item">
-                                        <div class="btn-modify-user-info btn btn-sm btn-default">修改资料</div>
+                                        <span class="plaint-text">剩余委托批改次数：</span>
+                                        <span class="CompositionCount"></span>
+                                    </div>
+                                    <div class="item">
+                                        <div class="btn-modify-user-info btn  btn-default IsInfo">完善资料，赠送5次课</div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="btn-modify-user-share btn  btn-default shareto">点我分享，获取课时</div>
+                                        <div class="copy-content"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="btn  btn-default howToUse">查看操作手册</div>
                                     </div>
                                 </div>
                                 <div class="study-schedule">
@@ -59,12 +73,12 @@
                 </div>
             </div>
 
-            <% @@include="/includes/body-footer.html" %>
-                <% @@include="/includes/footer.html" %>
-                    <script src="@PATH@js/is-login.js?version=@VERSION@"></script>
-                    <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
-                    <script src="@PATH@js/user-center-left-container.js?version=@VERSION@"></script>
-                    <script src="@PATH@js/student-user-center.js?version=@VERSION@"></script>
+        <% @@include="/includes/body-footer.html" %>
+        <% @@include="/includes/footer.html" %>
+        <script src="@PATH@js/is-login.js?version=@VERSION@"></script>
+        <script src="@PATH@js/entrance-and-topbar.js?version=@VERSION@"></script>
+        <script src="@PATH@js/user-center-left-container.js?version=@VERSION@"></script>
+        <script src="@PATH@js/student-user-center.js?version=@VERSION@"></script>
     </body>
 
 </html>

@@ -16,7 +16,7 @@ $(function () {
     }else {
         layui.layer.open({
             type: 0,
-            content: '登录信息已失效，请重新登录！',
+            content: '暂未登录，请先登录或注册',
             end: () => {
                 window.is_confirm = false;
                 location.href = _VIEW.index;

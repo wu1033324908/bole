@@ -21,9 +21,7 @@ $(function () {
     initModifyModule();
     // 点击表格上的图片,在浏览器显示大图
     $.showResourceInBrowser();
-
     // uploadFileModule();
-
     /**
      * @description 初始化表格
      */
@@ -86,6 +84,19 @@ $(function () {
                         return `<div class="td-ellipsis" title="${data}">${data}</div>`;
                     }
                 },
+                // {
+                //     title: '完成时间',
+                //     data: 'CourseTime',
+                //     className: 'show-detail-td',
+                //     render: (data, type, row, meta) => {
+                //         let res = data
+                //         if (res && res != "null") {
+                //             return `<div class="td-ellipsis" title="${res}">${res}</div>`;
+                //         }else{
+                //             return `<div class="td-ellipsis" title="">暂无数据</div>`;
+                //         }
+                //     }
+                // },
                 {
                     title: '图片',
                     data: 'PuzzlThumbnailUrl',
